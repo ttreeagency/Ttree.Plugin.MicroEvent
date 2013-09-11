@@ -46,6 +46,16 @@
     main:
       type: 'TYPO3.Neos:ContentCollection'
   properties:
+    title:
+      ui:
+        inspector:
+          group: 'moreinfo'
+    eventTbc:
+      type: boolean
+      ui:
+        label: 'To be confirmed'
+        inspector:
+          group: 'moreinfo'
     eventType:
       type: string
       defaultValue: ''
