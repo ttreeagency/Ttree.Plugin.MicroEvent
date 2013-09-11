@@ -1,0 +1,27 @@
+{namespace neos=TYPO3\Neos\ViewHelpers}
+{namespace ts=TYPO3\TypoScript\ViewHelpers}
+<article itemscope="" itemtype="http://schema.org/Event" class="ttree-plugin-microevent" xmlns:f="http://www.w3.org/1999/html">
+	<header>
+		<h1 itemprop="name headline">{title}</h1>
+		<div class="shortline">
+			<f:if condition="{node.properties.eventStartDate}">
+				<time datetime="{f:format.date(date: node.properties.eventStartDate, format: 'c')}" itemprop="date"><f:format.date forceLocale="fr" localeFormatType="date">{node.properties.eventStartDate}</f:format.date></time>
+				<f:if condition="{node.properties.eventEndDate}">
+					<span class="separator">&nbsp;-&nbsp;</span>
+					<time datetime="{f:format.date(date: node.properties.eventEndDate, format: 'c')}" itemprop="date"><f:format.date forceLocale="fr" localeFormatType="date">{node.properties.eventEndDate}</f:format.date></time>
+				</f:if>
+			</f:if>
+			<f:if condition="{node.properties.eventWebsite}">
+				<span class="separator">|</span>
+			</f:if>
+			<span>{node.properties.eventLocation}</span>
+			<f:if condition="{node.properties.eventWebsite}">
+				<span class="separator">|</span>
+				<span><a href="{node.properties.eventWebsite}">Site officiel</a></span>
+			</f:if>
+		</div>
+	</header>
+	<div itemprop="articleBody">
+		<ts:render path="main" />
+	</div>
+</article>

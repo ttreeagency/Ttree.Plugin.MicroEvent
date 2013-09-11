@@ -1,0 +1,9 @@
+
+resources:
+  methods:
+    'Ttree.Plugin.MicroEvent:EventController': method(Ttree\Plugin\MicroEvent\Controller\EventController->createAction())
+
+acls:
+  'TYPO3.Neos:Editor':
+    methods:
+      'Ttree.Plugin.MicroEvent:EventController': GRANT

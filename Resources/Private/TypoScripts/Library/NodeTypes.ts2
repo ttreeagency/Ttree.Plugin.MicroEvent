@@ -1,0 +1,21 @@
+prototype(TYPO3.Neos:ContentCollection).event {
+	condition = ${q(node).is('[instanceof Ttree.Plugin.MicroEvent:Event]')}
+	type = 'Ttree.Plugin.MicroEvent:Event'
+}
+
+prototype(TYPO3.Neos:ContentCollection).event < prototype(TYPO3.Neos:ContentCollection).event
+
+prototype(Ttree.Plugin.MicroEvent:Event) < prototype(TYPO3.Neos:Template)
+prototype(Ttree.Plugin.MicroEvent:Event) {
+	templatePath = 'resource://Ttree.Plugin.MicroEvent/Private/Templates/TypoScript/Event.html'
+	title = ${q(node).property('title')}
+	main = TYPO3.Neos:ContentCollection.Main
+	main.nodePath = 'main'
+}
+
+prototype(Ttree.Plugin.MicroEvent:EventPlugin) < prototype(TYPO3.Neos:Plugin)
+prototype(Ttree.Plugin.MicroEvent:EventPlugin) {
+	package = 'Ttree.Plugin.MicroEvent'
+	controller = 'Event'
+	action = 'index'
+}

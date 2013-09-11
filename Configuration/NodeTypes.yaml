@@ -1,0 +1,95 @@
+'Ttree.Plugin.MicroEvent:EventPlugin':
+  superTypes:
+    - 'TYPO3.Neos:Plugin'
+  ui:
+    label: 'Event Overview'
+    group: Plugins
+    icon: 'icon-calendar'
+    inlineEditable: true
+  properties:
+    package:    [ ]
+    subpackage: [ ]
+    controller: [ ]
+    action:     [ ]
+    displayType:
+      type: string
+      ui:
+        label: 'Show'
+        reloadIfChanged: TRUE
+        inspector:
+          group: 'pluginSettings'
+          editor: Content/Inspector/Editors/SelectBoxEditor
+          editorOptions:
+            placeholder: 'What kind of event ...'
+            values:
+              '':
+                label: 'All event'
+              upcoming:
+                label: 'Upcoming event'
+              archived:
+                label: 'Archived event'
+
+'Ttree.Plugin.MicroEvent:Event':
+  superTypes:
+    - 'TYPO3.Neos:Document'
+  ui:
+    label: 'Event'
+    icon:
+      light: Images/Icons/White/doc_empty_icon-16.png
+      dark: Images/Icons/Black/doc_empty_icon-16.png
+    inspector:
+      groups:
+        moreinfo:
+          label: 'Event details'
+          position: 2
+  childNodes:
+    main:
+      type: 'TYPO3.Neos:ContentCollection'
+  properties:
+    eventType:
+      type: string
+      defaultValue: ''
+      ui:
+        label: 'Event type'
+        reloadIfChanged: TRUE
+        inspector:
+          group: 'moreinfo'
+          editor: Content/Inspector/Editors/SelectBoxEditor
+          editorOptions:
+            placeholder: 'What kind of event ...'
+            values:
+              '':
+                label: ''
+              event:
+                label: 'Event'
+              talk:
+                label: 'Talk'
+              reminder:
+                label: 'Reminder'
+    eventLocation:
+      type: string
+      ui:
+        label: 'Location'
+        inspector:
+          group: moreinfo
+    eventStartDate:
+      type: date
+      ui:
+        label: 'Start at'
+        reloadIfChanged: true
+        inspector:
+          group: moreinfo
+    eventEndDate:
+      type: date
+      ui:
+        label: 'Finished at'
+        reloadIfChanged: true
+        inspector:
+          group: moreinfo
+    eventWebsite:
+      type: string
+      ui:
+        label: 'Event Website'
+        reloadIfChanged: true
+        inspector:
+          group: moreinfo
