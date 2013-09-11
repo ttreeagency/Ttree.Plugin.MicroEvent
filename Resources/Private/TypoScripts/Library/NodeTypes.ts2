@@ -9,7 +9,7 @@ prototype(Ttree.Plugin.MicroEvent:Event) < prototype(TYPO3.Neos:Template)
 prototype(Ttree.Plugin.MicroEvent:Event) {
 	templatePath = 'resource://Ttree.Plugin.MicroEvent/Private/Templates/TypoScript/Event.html'
 	title = ${q(node).property('title')}
-	main = TYPO3.Neos:ContentCollection.Main
+	main = TYPO3.Neos:ContentCollection.Default
 	main.nodePath = 'main'
 }
 
