@@ -3,7 +3,7 @@
 #                                                                        #
 
 -
-  name: 'Blog post creation'
+  name: 'Event creation'
   uriPattern:    '{node}/event/create'
   defaults:
     '@package':    'TYPO3.Neos'
@@ -11,10 +11,10 @@
     '@format':     'html'
     '@action':     'show'
     '--typo3_neos_nodetypes_typoscript_pluginimplementation':
-      '@package': 'Ttree.Plugin.MicroEvent'
+      '@package':    'Ttree.Plugin.MicroEvent'
       '@controller': 'Event'
-      '@action': 'create'
-      '@format': 'html'
+      '@action':     'create'
+      '@format':     'html'
   routeParts:
     node:
       handler:    TYPO3\Neos\Routing\FrontendNodeRoutePartHandler
