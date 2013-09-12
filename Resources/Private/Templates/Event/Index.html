@@ -17,8 +17,10 @@
 									<div class="timeline">
 										<f:if condition="{event.properties.eventStartDate}">
 											<time datetime="{f:format.date(date: event.properties.eventStartDate, format: 'c')}" itemprop="date"><f:format.date forceLocale="fr" localeFormatType="date">{event.properties.eventStartDate}</f:format.date></time>
-											<span class="separator">&nbsp;-&nbsp;</span>
-											<time datetime="{f:format.date(date: event.properties.eventEndDate, format: 'c')}" itemprop="date"><f:format.date forceLocale="fr" localeFormatType="date">{event.properties.eventEndDate}</f:format.date></time>
+											<f:if condition="{event.properties.eventEndDate}">
+												<span class="separator">&nbsp;-&nbsp;</span>
+												<time datetime="{f:format.date(date: event.properties.eventEndDate, format: 'c')}" itemprop="date"><f:format.date forceLocale="fr" localeFormatType="date">{event.properties.eventEndDate}</f:format.date></time>
+											</f:if>
 										</f:if>
 									</div>
 									<header>
