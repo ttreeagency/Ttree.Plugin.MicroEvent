@@ -8,7 +8,7 @@
 	</f:security.ifAuthenticated>
 	<f:if condition="{hasEventNodes}">
 		<f:then>
-			<typo3cr:widget.paginate widgetId="events-paginator" parentNode="{eventsNode}" nodeTypeFilter="Ttree.Plugin.MicroEvent:Event" as="paginatedEvents" configuration="{itemsPerPage: 5, insertBelow: 1, maximumNumberOfLinks: 15}">
+			<typo3cr:widget.paginate widgetId="events-paginator" parentNode="{eventsNode}" nodeTypeFilter="Ttree.Plugin.MicroEvent:Event" as="paginatedEvents" configuration="{itemsPerPage: 20, insertBelow: 1, maximumNumberOfLinks: 15}">
 				<section class="paginated-events row-fluid">
 					<f:for each="{paginatedEvents}" as="event">
 						<article class="span4 {event:style.eventClass(event: event)}">
@@ -28,6 +28,9 @@
 											{event.properties.title}
 										</h2>
 									</header>
+									<f:if condition="{event.properties.eventBlurb}">
+										<p>{event.properties.eventBlurb}</p>
+									</f:if>
 									<f:if condition="{event.properties.eventWebsite}">
 										<div class="shortline">
 												<span>{event.properties.eventLocation}</span>

@@ -50,6 +50,13 @@
       ui:
         inspector:
           group: 'moreinfo'
+    eventBlurb:
+      type: string
+      ui:
+        label: 'Blurb'
+        reloadIfChanged: TRUE
+        inspector:
+          group: 'moreinfo'
     eventTbc:
       type: boolean
       ui:

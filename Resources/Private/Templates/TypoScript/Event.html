@@ -2,7 +2,17 @@
 {namespace ts=TYPO3\TypoScript\ViewHelpers}
 <article itemscope="" itemtype="http://schema.org/Event" class="ttree-plugin-microevent" xmlns:f="http://www.w3.org/1999/html">
 	<header>
-		<h1 itemprop="name headline">{title}</h1>
+		<f:if condition="{eventBlurb}">
+			<f:then>
+				<header class="main">
+					<h1 itemprop="name headline">{title}</h1>
+					<h2>{eventBlurb}</h2>
+				</header>
+			</f:then>
+			<f:else>
+				<h1 itemprop="name headline">{title}</h1>
+			</f:else>
+		</f:if>
 		<div class="shortline">
 			<f:if condition="{node.properties.eventStartDate}">
 				<time datetime="{f:format.date(date: node.properties.eventStartDate, format: 'c')}" itemprop="date"><f:format.date forceLocale="fr" localeFormatType="date">{node.properties.eventStartDate}</f:format.date></time>
