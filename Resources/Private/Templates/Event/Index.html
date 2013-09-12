@@ -2,26 +2,16 @@
 {namespace neos=TYPO3\Neos\ViewHelpers}
 {namespace typo3cr=TYPO3\TYPO3CR\ViewHelpers}
 
-<f:security.ifAuthenticated>
-	<hr>
-	<f:form controller="Event" action="create"><f:form.submit class="button btn btn-primary" value="{f:translate(value:'Publish a new event')}"/></f:form>
-</f:security.ifAuthenticated>
-
-<div class="ttree-plugin-microevent" id="events-container">
+<div class="ttree-plugin-microevent" id="events-container" style="padding-top: 15px;">
+	<f:security.ifAuthenticated>
+		<f:form controller="Event" action="create"><f:form.submit class="button btn btn-primary" value="{f:translate(value:'Publish a new event')}"/></f:form>
+	</f:security.ifAuthenticated>
 	<f:if condition="{hasEventNodes}">
 		<f:then>
 			<typo3cr:widget.paginate widgetId="events-paginator" parentNode="{eventsNode}" nodeTypeFilter="Ttree.Plugin.MicroEvent:Event" as="paginatedEvents" configuration="{itemsPerPage: 5, insertBelow: 1, maximumNumberOfLinks: 15}">
 				<section class="paginated-events row-fluid">
 					<f:for each="{paginatedEvents}" as="event">
-						<f:if condition="{event.properties.eventType} == 'reminder'">
-							<f:then>
-								<article class="event event-reminder span4">
-									<i class="pull-right icon-info-sign icon-large-padding"></i>
-							</f:then>
-							<f:else>
-								<article class="event span4">
-							</f:else>
-						</f:if>
+						<article class="span4 {event:style.eventClass(event: event)}">
 							<neos:link.node node="{event}">
 								<div class="wrapper">
 									<div class="timeline">
