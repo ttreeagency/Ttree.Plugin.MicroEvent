@@ -1,22 +1,25 @@
-prototype(TYPO3.Neos:ContentCollection).event {
+
+prototype(TYPO3.Neos:PrimaryContent).eventPost {
 	condition = ${q(node).is('[instanceof Ttree.Plugin.MicroEvent:Event]')}
 	type = 'Ttree.Plugin.MicroEvent:Event'
+	@position = 'start'
 }
-
-prototype(TYPO3.Neos:ContentCollection).event < prototype(TYPO3.Neos:ContentCollection).event
 
 prototype(Ttree.Plugin.MicroEvent:Event) < prototype(TYPO3.Neos:Template)
 prototype(Ttree.Plugin.MicroEvent:Event) {
-	templatePath = 'resource://Ttree.Plugin.MicroEvent/Private/Templates/TypoScript/Event.html'
+	templatePath = 'resource://Ttree.Plugin.MicroEvent/Private/Templates/TypoScriptObjects/Event.html'
+
 	title = ${q(node).property('title')}
 	eventBlurb = ${q(node).property('eventBlurb')}
-	main = TYPO3.Neos:ContentCollection.Default
+
+	main = TYPO3.Neos:ContentCollection
 	main.nodePath = 'main'
 }
 
-prototype(Ttree.Plugin.MicroEvent:EventPlugin) < prototype(TYPO3.Neos:Plugin)
-prototype(Ttree.Plugin.MicroEvent:EventPlugin) {
-	package = 'Ttree.Plugin.MicroEvent'
-	controller = 'Event'
-	action = 'index'
+prototype(Ttree.Plugin.MicroEvent:EventList) < prototype(TYPO3.Neos:Template)
+prototype(Ttree.Plugin.MicroEvent:EventList) {
+	templatePath = 'resource://Ttree.Plugin.MicroEvent/Private/Templates/TypoScriptObjects/EventList.html'
+
+	upcomingEvents = ${q(documentNode).children('[instanceof Ttree.Plugin.MicroEvent:Event][archived = false]')}
+	archivedEvents = ${q(documentNode).children('[instanceof Ttree.Plugin.MicroEvent:Event][archived = true]')}
 }

@@ -52,8 +52,8 @@ class EventClassViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractViewHelp
 				$classes[] = 'event-type-reminder';
 				break;
 		}
-		if ($event->getProperty('eventTbc')) {
-			$classes[] = 'event-type-tbc';
+		if ($event->getProperty('archived')) {
+			$classes[] = 'event-type-archived';
 		}
 
 		return trim(implode(' ', $classes));

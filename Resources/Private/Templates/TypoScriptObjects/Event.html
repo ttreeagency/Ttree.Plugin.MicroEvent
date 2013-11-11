@@ -1,18 +1,13 @@
 {namespace neos=TYPO3\Neos\ViewHelpers}
 {namespace ts=TYPO3\TypoScript\ViewHelpers}
-<article itemscope="" itemtype="http://schema.org/Event" class="ttree-plugin-microevent" xmlns:f="http://www.w3.org/1999/html">
+<article itemscope="" itemtype="http://schema.org/Event" class="ttree-plugin-microevent" id="ttree-plugin-microevent-show">
 	<header>
-		<f:if condition="{eventBlurb}">
-			<f:then>
-				<header class="main">
-					<h1 itemprop="name headline">{title}</h1>
-					<h2>{eventBlurb}</h2>
-				</header>
-			</f:then>
-			<f:else>
-				<h1 itemprop="name headline">{title}</h1>
-			</f:else>
-		</f:if>
+		<neos:contentElement node="{node}">
+			<header class="main">
+				<h1 itemprop="name headline"><neos:contentElement.editable property="title">{title}</neos:contentElement.editable></h1>
+				<h2><neos:contentElement.editable property="eventBlurb">{eventBlurb}</neos:contentElement.editable></h2>
+			</header>
+		</neos:contentElement>
 		<div class="shortline">
 			<f:if condition="{node.properties.eventStartDate}">
 				<time datetime="{f:format.date(date: node.properties.eventStartDate, format: 'c')}" itemprop="date"><f:format.date forceLocale="fr" localeFormatType="date">{node.properties.eventStartDate}</f:format.date></time>
@@ -21,15 +16,16 @@
 					<time datetime="{f:format.date(date: node.properties.eventEndDate, format: 'c')}" itemprop="date"><f:format.date forceLocale="fr" localeFormatType="date">{node.properties.eventEndDate}</f:format.date></time>
 				</f:if>
 			</f:if>
-			<f:if condition="{node.properties.eventWebsite}">
+			<f:if condition="{node.properties.eventLocation}">
 				<span class="separator">|</span>
+				<span>{node.properties.eventLocation}</span>
 			</f:if>
-			<span>{node.properties.eventLocation}</span>
 			<f:if condition="{node.properties.eventWebsite}">
 				<span class="separator">|</span>
 				<span><a href="{node.properties.eventWebsite}">Site officiel</a></span>
 			</f:if>
 		</div>
+
 	</header>
 	<div itemprop="articleBody">
 		<ts:render path="main" />

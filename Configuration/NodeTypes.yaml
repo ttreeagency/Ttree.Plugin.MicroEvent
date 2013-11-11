@@ -1,23 +1,22 @@
-'Ttree.Plugin.MicroEvent:EventPlugin':
+'Ttree.Plugin.MicroEvent:EventList':
   superTypes:
-    - 'TYPO3.Neos:Plugin'
+    - 'TYPO3.Neos:Content'
   ui:
-    label: 'Event Overview'
-    group: Plugins
+    label: 'Event List'
+    group: plugins
     icon: 'icon-calendar'
-    inlineEditable: true
+    inspector:
+      groups:
+        event:
+          label: 'Event List'
   properties:
-    package:    [ ]
-    subpackage: [ ]
-    controller: [ ]
-    action:     [ ]
-    displayType:
+    mode:
       type: string
       ui:
-        label: 'Show'
+        label: 'Mode'
         reloadIfChanged: TRUE
         inspector:
-          group: 'pluginSettings'
+          group: 'event'
           editor: Content/Inspector/Editors/SelectBoxEditor
           editorOptions:
             placeholder: 'What kind of event ...'
@@ -34,9 +33,7 @@
     - 'TYPO3.Neos:Document'
   ui:
     label: 'Event'
-    icon:
-      light: Images/Icons/White/doc_empty_icon-16.png
-      dark: Images/Icons/Black/doc_empty_icon-16.png
+    icon: 'icon-calendar'
     inspector:
       groups:
         moreinfo:
@@ -47,22 +44,11 @@
       type: 'TYPO3.Neos:ContentCollection'
   properties:
     title:
-      ui:
-        inspector:
-          group: 'moreinfo'
+      type: string
+      inlineEditable: true
     eventBlurb:
       type: string
-      ui:
-        label: 'Blurb'
-        reloadIfChanged: TRUE
-        inspector:
-          group: 'moreinfo'
-    eventTbc:
-      type: boolean
-      ui:
-        label: 'To be confirmed'
-        inspector:
-          group: 'moreinfo'
+      inlineEditable: true
     eventType:
       type: string
       defaultValue: ''
@@ -110,3 +96,9 @@
         reloadIfChanged: true
         inspector:
           group: moreinfo
+    archived:
+      type: boolean
+      ui:
+        label: 'Archived'
+        inspector:
+          group: 'moreinfo'

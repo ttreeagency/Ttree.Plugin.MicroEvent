@@ -5,7 +5,7 @@
     "license": ["MIT"],
     "require": {
         "typo3/flow": "*",
-        "ttree/starter": "*"
+        "ttree/sortablenode": "*"
     },
     "autoload": {
         "psr-0": {
