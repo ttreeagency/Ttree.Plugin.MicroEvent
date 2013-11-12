@@ -45,10 +45,15 @@
   properties:
     title:
       type: string
-      inlineEditable: true
+      ui:
+        inspector:
+          group: 'document'
     eventBlurb:
       type: string
-      inlineEditable: true
+      ui:
+        label: 'Blurb'
+        inspector:
+          group: 'document'
     eventType:
       type: string
       defaultValue: ''
