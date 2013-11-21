@@ -20,6 +20,6 @@ prototype(Ttree.Plugin.MicroEvent:EventList) < prototype(TYPO3.Neos:Template)
 prototype(Ttree.Plugin.MicroEvent:EventList) {
 	templatePath = 'resource://Ttree.Plugin.MicroEvent/Private/Templates/TypoScriptObjects/EventList.html'
 
-	upcomingEvents = ${q(documentNode).children('[instanceof Ttree.Plugin.MicroEvent:Event][archived = false]')}
+	upcomingEvents = ${q(documentNode).children('[instanceof Ttree.Plugin.MicroEvent:Event][archived != true]')}
 	archivedEvents = ${q(documentNode).children('[instanceof Ttree.Plugin.MicroEvent:Event][archived = true]')}
 }
