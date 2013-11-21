@@ -36,17 +36,9 @@
 					</div>
 					<header>
 						<h2>
-							{event.properties.title}
+							{event.properties.title} <f:if condition="{event.properties.eventWebsite}"><small>{event.properties.eventLocation}</small></f:if>
 						</h2>
 					</header>
-					<f:if condition="{event.properties.eventBlurb}">
-						<p>{event.properties.eventBlurb}</p>
-					</f:if>
-					<f:if condition="{event.properties.eventWebsite}">
-						<div class="shortline">
-							<span>{event.properties.eventLocation}</span>
-						</div>
-					</f:if>
 				</div>
 			</neos:link.node>
 		</article>
