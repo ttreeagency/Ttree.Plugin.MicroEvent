@@ -103,6 +103,7 @@
           group: moreinfo
     archived:
       type: boolean
+      defaultValue: FALSE
       ui:
         label: 'Archived'
         inspector:
