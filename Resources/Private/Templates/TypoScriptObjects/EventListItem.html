@@ -1,0 +1,48 @@
+{namespace neos=TYPO3\Neos\ViewHelpers}
+{namespace ts=TYPO3\TypoScript\ViewHelpers}
+{namespace media=TYPO3\Media\ViewHelpers}
+{namespace event=Ttree\Plugin\MicroEvent\ViewHelpers}
+
+<article class="col-lg-4 col-md-6 col-sm-6 {event:style.eventClass(event: node)}">
+	<neos:link.node node="{node}">
+		<div class="events-header-overlay">
+			<header>
+				<h2>
+					{title}
+				</h2>
+			</header>
+			<f:if condition="{archived}">
+				<f:then>
+					<em class="events-event-flag events-event-flag-its-over">
+						<span>C'est terminé!</span>
+					</em>
+				</f:then>
+				<f:else>
+					<em class="events-event-flag">
+						<span>On vous attends ...</span>
+					</em>
+				</f:else>
+			</f:if>
+		</div>
+		<div class="wrapper">
+			<f:if condition="{eventLocation}">
+				<div class="events-event-location">
+					{eventLocation}
+				</div>
+			</f:if>
+			<div class="events-event-timeline">
+				<f:if condition="{eventStartDate}">
+					<time datetime="{f:format.date(date: eventStartDate, format: 'c')}" itemprop="date">
+						<f:format.date forceLocale="fr" localeFormatType="date">{eventStartDate}</f:format.date>
+					</time>
+					<f:if condition="{eventEndDate}">
+						<span class="separator">&nbsp;-&nbsp;</span>
+						<time datetime="{f:format.date(date: eventEndDate, format: 'c')}" itemprop="date">
+							<f:format.date forceLocale="fr" localeFormatType="date">{eventEndDate}</f:format.date>
+						</time>
+					</f:if>
+				</f:if>
+			</div>
+		</div>
+	</neos:link.node>
+</article>

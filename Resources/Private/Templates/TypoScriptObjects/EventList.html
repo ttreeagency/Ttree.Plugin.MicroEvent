@@ -3,44 +3,10 @@
 {namespace media=TYPO3\Media\ViewHelpers}
 {namespace event=Ttree\Plugin\MicroEvent\ViewHelpers}
 
-<neos:contentElement node="{node}" class="event-menu">
-	<div class="ttree-plugin-microevent" id="events-container">
-		<section class="paginated-events row-fluid">
-			<f:render section="itemsList" arguments="{events: upcomingEvents}" />
-			<div class="clearfix"></div>
-			<aside>
-				<header>
-					<h2>Les archives</h2>
-				</header>
-				<div>
-					<f:render section="itemsList" arguments="{events: archivedEvents}" />
-				</div>
-			</aside>
+<neos:contentElement node="{node}" class="{className}">
+	<div class="events-container">
+		<section class="events row">
+			<ts:render path="events" />
 		</section>
 	</div>
 </neos:contentElement>
-
-<f:section name="itemsList">
-	<f:for each="{events}" as="event">
-		<article class="span4 {event:style.eventClass(event: event)}">
-			<neos:link.node node="{event}">
-				<div class="wrapper">
-					<div class="timeline">
-						<f:if condition="{event.properties.eventStartDate}">
-							<time datetime="{f:format.date(date: event.properties.eventStartDate, format: 'c')}" itemprop="date"><f:format.date forceLocale="fr" localeFormatType="date">{event.properties.eventStartDate}</f:format.date></time>
-							<f:if condition="{event.properties.eventEndDate}">
-								<span class="separator">&nbsp;-&nbsp;</span>
-								<time datetime="{f:format.date(date: event.properties.eventEndDate, format: 'c')}" itemprop="date"><f:format.date forceLocale="fr" localeFormatType="date">{event.properties.eventEndDate}</f:format.date></time>
-							</f:if>
-						</f:if>
-					</div>
-					<header>
-						<h2>
-							{event.properties.title} <f:if condition="{event.properties.eventWebsite}"><small>{event.properties.eventLocation}</small></f:if>
-						</h2>
-					</header>
-				</div>
-			</neos:link.node>
-		</article>
-	</f:for>
-</f:section>

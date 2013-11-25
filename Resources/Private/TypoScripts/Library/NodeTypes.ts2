@@ -10,7 +10,6 @@ prototype(Ttree.Plugin.MicroEvent:Event) {
 	templatePath = 'resource://Ttree.Plugin.MicroEvent/Private/Templates/TypoScriptObjects/Event.html'
 
 	title = ${q(node).property('title')}
-	eventBlurb = ${q(node).property('eventBlurb')}
 
 	main = TYPO3.Neos:ContentCollection
 	main.nodePath = 'main'
@@ -19,7 +18,23 @@ prototype(Ttree.Plugin.MicroEvent:Event) {
 prototype(Ttree.Plugin.MicroEvent:EventList) < prototype(TYPO3.Neos:Template)
 prototype(Ttree.Plugin.MicroEvent:EventList) {
 	templatePath = 'resource://Ttree.Plugin.MicroEvent/Private/Templates/TypoScriptObjects/EventList.html'
+	className = 'event-menu'
 
-	upcomingEvents = ${q(documentNode).children('[instanceof Ttree.Plugin.MicroEvent:Event][archived = false]')}
-	archivedEvents = ${q(documentNode).children('[instanceof Ttree.Plugin.MicroEvent:Event][archived = true]')}
+	events = TYPO3.TypoScript:Collection {
+		collection = ${q(documentNode).children('[instanceof Ttree.Plugin.MicroEvent:Event]')}
+		itemRenderer = Ttree.Plugin.MicroEvent:EventListItem
+		itemName = 'node'
+	}
+}
+
+prototype(Ttree.Plugin.MicroEvent:EventListItem) < prototype(TYPO3.Neos:Template)
+prototype(Ttree.Plugin.MicroEvent:EventListItem) {
+	templatePath = 'resource://Ttree.Plugin.MicroEvent/Private/Templates/TypoScriptObjects/EventListItem.html'
+
+	title = ${q(node).property('title')}
+	archived = ${q(node).property('archived')}
+	eventLocation = ${q(node).property('eventLocation')}
+	eventWebsite = ${q(node).property('eventWebsite')}
+	eventStartDate = ${q(node).property('eventStartDate')}
+	eventEndDate = ${q(node).property('eventEndDate')}
 }
