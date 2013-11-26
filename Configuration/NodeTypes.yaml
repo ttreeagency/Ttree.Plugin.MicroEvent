@@ -48,12 +48,12 @@
       ui:
         inspector:
           group: 'document'
-    eventBlurb:
+    description:
       type: string
       ui:
-        label: 'Blurb'
+        label: 'Description'
         inspector:
-          group: 'document'
+          group: 'moreinfo'
     eventType:
       type: string
       defaultValue: ''
@@ -74,10 +74,16 @@
                 label: 'Talk'
               reminder:
                 label: 'Reminder'
-    eventLocation:
+    eventLocality:
       type: string
       ui:
-        label: 'Location'
+        label: 'Locality'
+        inspector:
+          group: moreinfo
+    eventCountry:
+      type: string
+      ui:
+        label: 'Country'
         inspector:
           group: moreinfo
     eventStartDate:

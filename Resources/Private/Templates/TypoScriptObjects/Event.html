@@ -1,29 +1,41 @@
 {namespace neos=TYPO3\Neos\ViewHelpers}
 {namespace ts=TYPO3\TypoScript\ViewHelpers}
-<article itemscope="" itemtype="http://schema.org/Event" class="ttree-plugin-microevent" id="ttree-plugin-microevent-show">
-	<header>
-		<header class="main">
-			<h1 itemprop="name headline">{title}</h1>
-		</header>
-		<div class="shortline">
-			<f:if condition="{node.properties.eventStartDate}">
-				<time datetime="{f:format.date(date: node.properties.eventStartDate, format: 'c')}" itemprop="date"><f:format.date forceLocale="fr" localeFormatType="date">{node.properties.eventStartDate}</f:format.date></time>
-				<f:if condition="{node.properties.eventEndDate}">
-					<span class="separator">&nbsp;-&nbsp;</span>
-					<time datetime="{f:format.date(date: node.properties.eventEndDate, format: 'c')}" itemprop="date"><f:format.date forceLocale="fr" localeFormatType="date">{node.properties.eventEndDate}</f:format.date></time>
-				</f:if>
-			</f:if>
-			<f:if condition="{node.properties.eventLocation}">
-				<span class="separator">|</span>
-				<span>{node.properties.eventLocation}</span>
-			</f:if>
-			<f:if condition="{node.properties.eventWebsite}">
-				<span class="separator">|</span>
-				<span><a href="{node.properties.eventWebsite}">Site officiel</a></span>
-			</f:if>
-		</div>
-
+{namespace media=TYPO3\Media\ViewHelpers}
+<article itemscope itemtype="http://schema.org/Event" class="ttree-plugin-microevent" id="ttree-plugin-microevent-show">
+	<header class="main">
+		<h1 itemprop="name headline">{title}</h1>
 	</header>
+	<f:if condition="{mainImage}">
+		<meta itemprop="image" content="{media:uri.image(image: mainImage, maximumWidth:800)}"/>
+	</f:if>
+	<div class="shortline">
+		<f:if condition="{date}">
+			<meta itemprop="startDate" content="{f:format.date(date: eventStartDate, format: 'c')}"/>
+			<f:if condition="{eventEndDate}">
+				<meta itemprop="startDate" content="{f:format.date(date: eventEndDate, format: 'c')}"/>
+			</f:if>
+			{date}
+		</f:if>
+
+		<span itemprop="location" itemscope itemtype="http://schema.org/Place">
+			<span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+				<f:if condition="{eventLocality}">
+					<span class="separator">|</span>
+					<span itemprop="addressLocality">{eventLocality}</span>
+				</f:if>
+				<f:if condition="{eventCountry}">
+					<span class="separator">|</span>
+					<span itemprop="addressCountry">{eventCountry}</span>
+				</f:if>
+			</span>
+			<f:if condition="{eventWebsite}">
+				<span class="separator">|</span>
+				<a href="{eventWebsite}">Site officiel</a>
+				<meta itemprop="url" content="{eventWebsite}"/>
+			</f:if>
+		</span>
+	</div>
+
 	<div itemprop="articleBody">
 		<ts:render path="main" />
 	</div>

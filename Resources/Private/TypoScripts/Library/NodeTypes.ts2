@@ -1,18 +1,12 @@
+prototype(Ttree.Plugin.MicroEvent:HumanDateInterval) >
+prototype(Ttree.Plugin.MicroEvent:HumanDateInterval) {
+	@class = 'Ttree\\Plugin\\MicroEvent\\TypoScript\\HumanDateIntervalImplementation'
+}
 
-prototype(TYPO3.Neos:PrimaryContent).eventPost {
+prototype(TYPO3.Neos:PrimaryContent).event {
 	condition = ${q(node).is('[instanceof Ttree.Plugin.MicroEvent:Event]')}
 	type = 'Ttree.Plugin.MicroEvent:Event'
 	@position = 'start'
-}
-
-prototype(Ttree.Plugin.MicroEvent:Event) < prototype(TYPO3.Neos:Template)
-prototype(Ttree.Plugin.MicroEvent:Event) {
-	templatePath = 'resource://Ttree.Plugin.MicroEvent/Private/Templates/TypoScriptObjects/Event.html'
-
-	title = ${q(node).property('title')}
-
-	main = TYPO3.Neos:ContentCollection
-	main.nodePath = 'main'
 }
 
 prototype(Ttree.Plugin.MicroEvent:EventList) < prototype(TYPO3.Neos:Template)
@@ -21,20 +15,35 @@ prototype(Ttree.Plugin.MicroEvent:EventList) {
 	className = 'event-menu'
 
 	events = TYPO3.TypoScript:Collection {
+		prototype(Ttree.Plugin.MicroEvent:Event) {
+			templatePath = 'resource://Ttree.Plugin.MicroEvent/Private/Templates/TypoScriptObjects/EventListItem.html'
+		}
 		collection = ${q(documentNode).children('[instanceof Ttree.Plugin.MicroEvent:Event]')}
-		itemRenderer = Ttree.Plugin.MicroEvent:EventListItem
+		itemRenderer = Ttree.Plugin.MicroEvent:Event
 		itemName = 'node'
 	}
 }
 
-prototype(Ttree.Plugin.MicroEvent:EventListItem) < prototype(TYPO3.Neos:Template)
-prototype(Ttree.Plugin.MicroEvent:EventListItem) {
-	templatePath = 'resource://Ttree.Plugin.MicroEvent/Private/Templates/TypoScriptObjects/EventListItem.html'
+prototype(Ttree.Plugin.MicroEvent:Event) < prototype(TYPO3.Neos:Template)
+prototype(Ttree.Plugin.MicroEvent:Event) {
+	templatePath = 'resource://Ttree.Plugin.MicroEvent/Private/Templates/TypoScriptObjects/Event.html'
+
+	mainImageNode = ${q(node).children('main').children('[instanceof TYPO3.Neos.NodeTypes:Image]').get(0)}
+	mainImage = ${q(this.mainImageNode).property('image')}
 
 	title = ${q(node).property('title')}
 	archived = ${q(node).property('archived')}
-	eventLocation = ${q(node).property('eventLocation')}
+	eventLocality = ${q(node).property('eventLocality')}
+	eventCountry = ${q(node).property('eventCountry')}
 	eventWebsite = ${q(node).property('eventWebsite')}
 	eventStartDate = ${q(node).property('eventStartDate')}
 	eventEndDate = ${q(node).property('eventEndDate')}
+	date = Ttree.Plugin.MicroEvent:HumanDateInterval {
+		startDate = ${q(node).property('eventStartDate')}
+		endDate = ${q(node).property('eventEndDate')}
+	}
+
+	main = TYPO3.Neos:ContentCollection {
+		nodePath = 'main'
+	}
 }

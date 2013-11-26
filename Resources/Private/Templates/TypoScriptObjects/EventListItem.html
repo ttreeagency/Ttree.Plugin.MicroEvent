@@ -3,14 +3,17 @@
 {namespace media=TYPO3\Media\ViewHelpers}
 {namespace event=Ttree\Plugin\MicroEvent\ViewHelpers}
 
-<article class="col-lg-4 col-md-6 col-sm-6 {event:style.eventClass(event: node)}">
-	<neos:link.node node="{node}">
+<article itemscope itemtype="http://schema.org/Event" class="col-lg-4 col-md-6 col-sm-6 {event:style.eventClass(event: node)}">
+	<neos:link.node additionalAttributes="{itemprop: 'url'}" node="{node}">
 		<div class="events-header-overlay">
 			<header>
-				<h2>
+				<h2 itemprop="name headline">
 					{title}
 				</h2>
 			</header>
+			<f:if condition="{mainImage}">
+				<meta itemprop="image" content="{media:uri.image(image: mainImage, maximumWidth:800)}"/>
+			</f:if>
 			<f:if condition="{archived}">
 				<f:then>
 					<em class="events-event-flag events-event-flag-its-over">
@@ -25,22 +28,23 @@
 			</f:if>
 		</div>
 		<div class="wrapper">
-			<f:if condition="{eventLocation}">
-				<div class="events-event-location">
-					{eventLocation}
+			<f:if condition="{eventLocality}">
+				<div itemprop="location" itemscope itemtype="http://schema.org/Place" class="events-event-location">
+					<span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+						<span itemprop="addressLocality">{eventLocality}</span>
+						<f:if condition="{eventCountry}">
+							<span class="separator">|</span> <span itemprop="addressCountry">{eventCountry}</span>
+						</f:if>
+					</span>
 				</div>
 			</f:if>
 			<div class="events-event-timeline">
-				<f:if condition="{eventStartDate}">
-					<time datetime="{f:format.date(date: eventStartDate, format: 'c')}" itemprop="date">
-						<f:format.date forceLocale="fr" localeFormatType="date">{eventStartDate}</f:format.date>
-					</time>
+				<f:if condition="{date}">
+					<meta itemprop="startDate" content="{f:format.date(date: eventStartDate, format: 'c')}"/>
 					<f:if condition="{eventEndDate}">
-						<span class="separator">&nbsp;-&nbsp;</span>
-						<time datetime="{f:format.date(date: eventEndDate, format: 'c')}" itemprop="date">
-							<f:format.date forceLocale="fr" localeFormatType="date">{eventEndDate}</f:format.date>
-						</time>
+						<meta itemprop="startDate" content="{f:format.date(date: eventEndDate, format: 'c')}"/>
 					</f:if>
+					{date}
 				</f:if>
 			</div>
 		</div>
