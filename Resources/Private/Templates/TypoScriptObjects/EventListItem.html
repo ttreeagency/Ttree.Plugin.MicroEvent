@@ -4,7 +4,7 @@
 {namespace event=Ttree\Plugin\MicroEvent\ViewHelpers}
 
 <article itemscope itemtype="http://schema.org/Event" class="col-lg-4 col-md-6 col-sm-6 {event:style.eventClass(event: node)}">
-	<neos:link.node additionalAttributes="{itemprop: 'url'}" node="{node}">
+	<neos:link.node node="{node}">
 		<div class="events-header-overlay">
 			<header>
 				<h2 itemprop="name headline">
@@ -12,7 +12,8 @@
 				</h2>
 			</header>
 			<f:if condition="{mainImage}">
-				<meta itemprop="image" content="{media:uri.image(image: mainImage, maximumWidth:800)}"/>
+				<meta itemprop="image" content="{media:uri.image(image: mainImage, maximumWidth:800)}">
+				<meta itemprop="url" content="{neos:uri.link.node(node: post, absolute: 1)}">
 			</f:if>
 			<f:if condition="{archived}">
 				<f:then>
@@ -22,7 +23,7 @@
 				</f:then>
 				<f:else>
 					<em class="events-event-flag">
-						<span>On vous attends ...</span>
+						<span>On vous attend!</span>
 					</em>
 				</f:else>
 			</f:if>
