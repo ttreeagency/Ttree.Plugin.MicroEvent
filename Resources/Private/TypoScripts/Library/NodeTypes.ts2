@@ -3,7 +3,7 @@ prototype(Ttree.Plugin.MicroEvent:HumanDateInterval) {
 	@class = 'Ttree\\Plugin\\MicroEvent\\TypoScript\\HumanDateIntervalImplementation'
 }
 
-prototype(TYPO3.Neos:PrimaryContent).event {
+prototype(TYPO3.Neos:PrimaryContent).ttreePluginMicroEventEvent {
 	condition = ${q(node).is('[instanceof Ttree.Plugin.MicroEvent:Event]')}
 	type = 'Ttree.Plugin.MicroEvent:Event'
 	@position = 'start'
