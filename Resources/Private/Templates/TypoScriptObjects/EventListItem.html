@@ -13,7 +13,7 @@
 			</header>
 			<f:if condition="{mainImage}">
 				<meta itemprop="image" content="{media:uri.image(image: mainImage, maximumWidth:800)}">
-				<meta itemprop="url" content="{neos:uri.link.node(node: post, absolute: 1)}">
+				<meta itemprop="url" content="{neos:uri.node(node: post, absolute: 1)}">
 			</f:if>
 			<f:if condition="{archived}">
 				<f:then>
