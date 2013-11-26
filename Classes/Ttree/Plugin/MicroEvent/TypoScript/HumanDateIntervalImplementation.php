@@ -81,7 +81,7 @@ class HumanDateIntervalImplementation extends AbstractTypoScriptObject {
 		$output = NULL;
 		/** @var \DateTime $startDate */
 		$startDate = $this->tsValue('startDate');
-		if ($startDate instanceof \DateTime) {
+		if (!$startDate instanceof \DateTime) {
 			return $output;
 		}
 		/** @var \DateTime $endDate */
