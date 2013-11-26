@@ -86,12 +86,11 @@ class HumanDateIntervalImplementation extends AbstractTypoScriptObject {
 		}
 		/** @var \DateTime $endDate */
 		$endDate = $this->tsValue('endDate');
-		if ($startDate instanceof \DateTime && $endDate === NULL) {
+		if ($startDate instanceof \DateTime && !$endDate instanceof \DateTime) {
 			$output = $this->formatSingleDate($startDate);
-		}
-		elseif ($startDate->diff($endDate)->m === 0) {
+		} elseif ($endDate instanceof \DateTime && $startDate->diff($endDate)->m === 0) {
 			$output = $this->formatSingleMonthDateInterval($startDate, $endDate);
-		} elseif ($endDate instanceof \DateTime) {
+		} elseif ($startDate instanceof \DateTime && $endDate instanceof \DateTime) {
 			$output = $this->formatMultipleMonthDateInterval($startDate, $endDate);
 		}
 		return $output;
