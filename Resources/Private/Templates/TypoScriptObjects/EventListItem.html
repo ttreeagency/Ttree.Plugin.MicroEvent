@@ -3,7 +3,7 @@
 {namespace media=TYPO3\Media\ViewHelpers}
 {namespace event=Ttree\Plugin\MicroEvent\ViewHelpers}
 
-<article itemscope itemtype="http://schema.org/Event" class="col-lg-4 col-md-6 col-sm-6 {event:style.eventClass(event: node)}">
+<article itemscope itemtype="http://schema.org/Event" class="col-lg-4 col-md-6 col-sm-6 {event:style.eventClass(event: node)} {f:if(condition:archived,else:'events-upcoming')}">
 	<neos:link.node node="{node}">
 		<div class="events-header-overlay">
 			<header>
@@ -29,6 +29,15 @@
 			</f:if>
 		</div>
 		<div class="wrapper">
+			<div class="events-event-timeline">
+				<f:if condition="{date}">
+					<meta itemprop="startDate" content="{f:format.date(date: eventStartDate, format: 'c')}"/>
+					<f:if condition="{eventEndDate}">
+						<meta itemprop="startDate" content="{f:format.date(date: eventEndDate, format: 'c')}"/>
+					</f:if>
+					{date}
+				</f:if>
+			</div>
 			<f:if condition="{eventLocality}">
 				<div itemprop="location" itemscope itemtype="http://schema.org/Place" class="events-event-location">
 					<span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
@@ -39,15 +48,6 @@
 					</span>
 				</div>
 			</f:if>
-			<div class="events-event-timeline">
-				<f:if condition="{date}">
-					<meta itemprop="startDate" content="{f:format.date(date: eventStartDate, format: 'c')}"/>
-					<f:if condition="{eventEndDate}">
-						<meta itemprop="startDate" content="{f:format.date(date: eventEndDate, format: 'c')}"/>
-					</f:if>
-					{date}
-				</f:if>
-			</div>
 		</div>
 	</neos:link.node>
 </article>
