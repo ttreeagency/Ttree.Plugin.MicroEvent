@@ -1,0 +1,20 @@
+		<script type="application/ld+json">
+		<![CDATA[{]]>
+		  "@context" : "http://schema.org",
+		  "@type" : "Event",
+		  "name" : "{title -> f:format.htmlspecialchars()}",
+		  <f:if condition="{image}">"image" : "{image -> f:format.htmlspecialchars()}",</f:if>
+		  <f:if condition="{eventStartDate}">"startDate" : "{f:format.date(date: eventStartDate, format: 'c')}",</f:if>
+		  <f:if condition="{eventEndDate}">"endDate" : "{f:format.date(date: eventEndDate, format: 'c')}",</f:if>
+		  "location" : <![CDATA[{]]>
+		  	<f:if condition="{eventWebsite}">"url" : "{eventWebsite -> f:format.htmlspecialchars()}",</f:if>
+		  	"@type" : "Place",
+		  	<f:if condition="{eventLocality}">"address" : <![CDATA[{]]>
+		  		"@type" : "PostalAddress",
+		  		"addressLocality" : "{eventLocality -> f:format.htmlspecialchars()}"
+		  		"addressCountry" : "{eventCountry -> f:format.htmlspecialchars()}"
+		  	}</f:if>
+		  },
+		  "articleBody" : "{articleBody -> f:format.htmlspecialchars()}"
+		}
+		</script>

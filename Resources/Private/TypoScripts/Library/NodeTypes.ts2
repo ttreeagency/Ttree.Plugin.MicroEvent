@@ -33,17 +33,44 @@ prototype(Ttree.Plugin.MicroEvent:Event) {
 
 	title = ${q(node).property('title')}
 	archived = ${q(node).property('archived')}
-	eventLocality = ${q(node).property('eventLocality')}
-	eventCountry = ${q(node).property('eventCountry')}
+
+	eventLocationName = ${q(node).property('postalAddressName')}
+	eventStreetAddress = ${q(node).property('postalAddressStreetAddress')}
+	eventPostalCode = ${q(node).property('postalAddressPostalCode')}
+	eventLocality = ${q(node).property('postalAddressLocality')}
+	eventCountry = ${q(node).property('postalAddressCountry')}
+
 	eventWebsite = ${q(node).property('eventWebsite')}
+
 	eventStartDate = ${q(node).property('eventStartDate')}
 	eventEndDate = ${q(node).property('eventEndDate')}
+
 	date = Ttree.Plugin.MicroEvent:HumanDateInterval {
 		startDate = ${q(node).property('eventStartDate')}
 		endDate = ${q(node).property('eventEndDate')}
 	}
 
+	articleBody = Ttree.Plugin.Seo:DocumentTeaser {
+		maximumCharacters = 800
+	}
+
+	teaser = TYPO3.TypoScript:Collection {
+		itemName = 'node'
+		itemRenderer = TYPO3.Neos:ContentCase
+		collection = ${q(documentNode).children('main').children().slice(0,1)}
+	}
+
+	content = TYPO3.TypoScript:Collection {
+		itemName = 'node'
+		itemRenderer = TYPO3.Neos:ContentCase
+		collection = ${q(documentNode).children('main').children().slice(1)}
+	}
+
 	main = TYPO3.Neos:ContentCollection {
 		nodePath = 'main'
 	}
+}
+
+prototype(Ttree.Plugin.MicroEvent:EventLinkedData) < prototype(Ttree.Plugin.MicroEvent:Event) {
+	templatePath = 'resource://Ttree.Plugin.MicroEvent/Private/Templates/LinkedData/Event.html'
 }

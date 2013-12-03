@@ -2,39 +2,62 @@
 {namespace ts=TYPO3\TypoScript\ViewHelpers}
 {namespace media=TYPO3\Media\ViewHelpers}
 <article itemscope itemtype="http://schema.org/Event" class="ttree-plugin-microevent" id="ttree-plugin-microevent-show">
-	<header class="main">
+	<header class="main chapter">
+		<f:if condition="{description}">
+			<h2>{description}</h2>
+		</f:if>
 		<h1 itemprop="name headline">{title}</h1>
 	</header>
 	<f:if condition="{mainImage}">
 		<meta itemprop="image" content="{media:uri.image(image: mainImage, maximumWidth:800)}"/>
 	</f:if>
-	<div class="shortline">
-		<f:if condition="{date}">
-			<meta itemprop="startDate" content="{f:format.date(date: eventStartDate, format: 'c')}"/>
-			<f:if condition="{eventEndDate}">
-				<meta itemprop="startDate" content="{f:format.date(date: eventEndDate, format: 'c')}"/>
-			</f:if>
-			{date}
-		</f:if>
-		<span itemprop="location" itemscope itemtype="http://schema.org/Place">
-			<span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-				<f:if condition="{eventLocality}">
-					<span class="separator">|</span>
-					<span itemprop="addressLocality">{eventLocality}</span>
-				</f:if>
-				<f:if condition="{eventCountry}">
-					<span class="separator">|</span>
-					<span itemprop="addressCountry">{eventCountry}</span>
-				</f:if>
-			</span>
-			<f:if condition="{eventWebsite}">
-				<span class="separator">|</span>
-				<a href="{eventWebsite}">Site officiel</a>
-				<meta itemprop="url" content="{eventWebsite}"/>
-			</f:if>
-		</span>
+	<div class="row row-margin-bottom">
+		<div class="col-lg-7 col-md-6">
+			<ts:render path="teaser" />
+		</div>
+		<div class="col-lg-5 col-md-6">
+			<div class="events-shortline">
+				<h3>Quand &amp; où ?</h3>
+				<div class="row">
+					<div class="col-md-6">
+						<f:if condition="{date}">
+							<meta itemprop="startDate" content="{f:format.date(date: eventStartDate, format: 'c')}"/>
+							<f:if condition="{eventEndDate}">
+								<meta itemprop="startDate" content="{f:format.date(date: eventEndDate, format: 'c')}"/>
+							</f:if>
+							<div class="events-date">{date}</div>
+							<neos:link.node node="{node}" class="text-small" format="ical">Télécharger (<em>iCal</em>)</neos:link.node>
+						</f:if>
+					</div>
+					<div class="col-md-6">
+						<span itemprop="location" itemscope itemtype="http://schema.org/Place">
+							<f:if condition="{eventLocationName}">
+								<div itemprop="name"><b>{eventLocationName}</b></div>
+							</f:if>
+							<span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+								<f:if condition="{eventStreetAddress}">
+									<div itemprop="streetAddress">{eventStreetAddress}</div>
+								</f:if>
+								<f:if condition="{eventLocality}">
+									<div>
+										<f:if condition="{eventPostalCode}">
+											<f:if condition="{eventCountry}"><span itemprop="addressCountry">{eventCountry}</span>&#8209;</f:if><span itemprop="postalCode">{eventPostalCode}</span>
+											<span itemprop="addressLocality">{eventLocality}</span>
+										</f:if>
+									</div>
+								</f:if>
+							</span>
+							<f:if condition="{eventWebsite}">
+								<div>
+									<a href="{eventWebsite}">Site officiel</a>
+									<meta itemprop="url" content="{eventWebsite}"/>
+								</div>
+							</f:if>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-	<div itemprop="articleBody">
-		<ts:render path="main" />
-	</div>
+	<ts:render path="content" />
 </article>

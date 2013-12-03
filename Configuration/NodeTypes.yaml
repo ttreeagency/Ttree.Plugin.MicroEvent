@@ -9,36 +9,61 @@
       groups:
         event:
           label: 'Event List'
+
+'Ttree.Plugin.MicroEvent:PostalAddress':
+  abstract: TRUE
+  ui:
+    label: 'Postal Address'
+    inspector:
+      groups:
+        postalAddress:
+          label: 'Postal Address'
   properties:
-    mode:
+    postalAddressName:
       type: string
       ui:
-        label: 'Mode'
-        reloadIfChanged: TRUE
+        label: 'Name'
         inspector:
-          group: 'event'
-          editor: Content/Inspector/Editors/SelectBoxEditor
-          editorOptions:
-            placeholder: 'What kind of event ...'
-            values:
-              '':
-                label: 'All event'
-              upcoming:
-                label: 'Upcoming event'
-              archived:
-                label: 'Archived event'
+          group: postalAddress
+    postalAddressStreetAddress:
+      type: string
+      ui:
+        label: 'Street Address'
+        inspector:
+          group: postalAddress
+    postalAddressPostalCode:
+      type: string
+      ui:
+        label: 'Postal Code'
+        inspector:
+          group: postalAddress
+    postalAddressLocality:
+      type: string
+      ui:
+        label: 'Locality'
+        inspector:
+          group: postalAddress
+    postalAddressCountry:
+      type: string
+      ui:
+        label: 'Country'
+        inspector:
+          group: postalAddress
 
 'Ttree.Plugin.MicroEvent:Event':
   superTypes:
+    - 'Ttree.Plugin.MicroEvent:PostalAddress'
     - 'TYPO3.Neos:Document'
   ui:
     label: 'Event'
     icon: 'icon-calendar'
     inspector:
       groups:
-        moreinfo:
-          label: 'Event details'
+        eventDetails:
+          label: 'Event'
           position: 2
+        postalAddress:
+          position: 3
   childNodes:
     main:
       type: 'TYPO3.Neos:ContentCollection'
@@ -53,7 +78,7 @@
       ui:
         label: 'Description'
         inspector:
-          group: 'moreinfo'
+          group: 'eventDetails'
     eventType:
       type: string
       defaultValue: ''
@@ -61,7 +86,7 @@
         label: 'Event type'
         reloadIfChanged: TRUE
         inspector:
-          group: 'moreinfo'
+          group: 'eventDetails'
           editor: Content/Inspector/Editors/SelectBoxEditor
           editorOptions:
             placeholder: 'What kind of event ...'
@@ -74,43 +99,49 @@
                 label: 'Talk'
               reminder:
                 label: 'Reminder'
-    eventLocality:
+    eventLatitude:
       type: string
       ui:
-        label: 'Locality'
+        label: 'Latitude'
+        reloadIfChanged: true
         inspector:
-          group: moreinfo
-    eventCountry:
+          group: postalAddress
+    eventLongitude:
       type: string
       ui:
-        label: 'Country'
+        label: 'Longitude'
+        reloadIfChanged: true
         inspector:
-          group: moreinfo
+          group: postalAddress
     eventStartDate:
       type: date
       ui:
         label: 'Start at'
         reloadIfChanged: true
         inspector:
-          group: moreinfo
+          group: eventDetails
+          editorOptions:
+            format: 'dd-mm-yyyy hh:ii'
     eventEndDate:
       type: date
       ui:
         label: 'Finished at'
         reloadIfChanged: true
         inspector:
-          group: moreinfo
+          group: eventDetails
+          editorOptions:
+            format: 'dd-mm-yyyy hh:ii'
     eventWebsite:
       type: string
       ui:
         label: 'Event Website'
         reloadIfChanged: true
         inspector:
-          group: moreinfo
+          group: eventDetails
     archived:
       type: boolean
       defaultValue: FALSE
       ui:
         label: 'Archived'
         inspector:
-          group: 'moreinfo'
+          group: 'eventDetails'
