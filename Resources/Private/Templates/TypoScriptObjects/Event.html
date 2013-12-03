@@ -7,60 +7,45 @@
 			<h2>{description}</h2>
 		</f:if>
 		<h1 itemprop="name headline">{title}</h1>
+		<f:if condition="{mainImage}">
+			<meta itemprop="image" content="{media:uri.image(image: mainImage, maximumWidth:800)}"/>
+		</f:if>
 	</header>
-	<f:if condition="{mainImage}">
-		<meta itemprop="image" content="{media:uri.image(image: mainImage, maximumWidth:800)}"/>
-	</f:if>
-	<div class="row row-margin-bottom">
-		<div class="col-lg-7 col-md-6">
-			<ts:render path="teaser" />
-		</div>
-		<div class="col-lg-5 col-md-6">
-			<div class="events-shortline">
-				<h3>Quand &amp; où ?</h3>
-				<div class="row">
-					<div class="col-md-6">
-						<f:if condition="{date}">
-							<meta itemprop="startDate" content="{f:format.date(date: eventStartDate, format: 'c')}"/>
-							<f:if condition="{eventEndDate}">
-								<meta itemprop="startDate" content="{f:format.date(date: eventEndDate, format: 'c')}"/>
-							</f:if>
-							<div class="events-date">{date}</div>
-							<f:comment>
-								<!-- Wait the resolution of: https://review.typo3.org/#/c/25904/ -->
-								<neos:link.node node="{node}" class="text-small" format="ics">Télécharger (<em>iCal</em>)</neos:link.node>
-							</f:comment>
-						</f:if>
-					</div>
-					<div class="col-md-6">
-						<span itemprop="location" itemscope itemtype="http://schema.org/Place">
-							<f:if condition="{eventLocationName}">
-								<div itemprop="name"><b>{eventLocationName}</b></div>
-							</f:if>
-							<span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-								<f:if condition="{eventStreetAddress}">
-									<div itemprop="streetAddress">{eventStreetAddress}</div>
-								</f:if>
-								<f:if condition="{eventLocality}">
-									<div>
-										<f:if condition="{eventPostalCode}">
-											<f:if condition="{eventCountry}"><span itemprop="addressCountry">{eventCountry}</span>&#8209;</f:if><span itemprop="postalCode">{eventPostalCode}</span>
-											<span itemprop="addressLocality">{eventLocality}</span>
-										</f:if>
-									</div>
-								</f:if>
-							</span>
-							<f:if condition="{eventWebsite}">
-								<div>
-									<a href="{eventWebsite}">Site officiel</a>
-									<meta itemprop="url" content="{eventWebsite}"/>
-								</div>
-							</f:if>
-						</span>
-					</div>
-				</div>
-			</div>
-		</div>
+	<div class="events-shortline">
+		<h3>Où &amp; quand ?</h3>
+		<f:if condition="{date}">
+			<meta itemprop="startDate" content="{f:format.date(date: eventStartDate, format: 'c')}"/>
+			<f:if condition="{eventEndDate}">
+				<meta itemprop="startDate" content="{f:format.date(date: eventEndDate, format: 'c')}"/>
+			</f:if>
+			<span class="events-date">{date}</span> <span class="separator">|</span>
+			<f:comment>
+				<!-- Wait the resolution of: https://review.typo3.org/#/c/25904/ -->
+				<neos:link.node node="{node}" class="text-small" format="ics">Télécharger (<em>iCal</em>)</neos:link.node>
+			</f:comment>
+		</f:if>
+		<span itemprop="location" itemscope itemtype="http://schema.org/Place">
+			<f:if condition="{eventLocationName}">
+				<span itemprop="name"><b>{eventLocationName}</b></span>
+			</f:if>
+			<span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+				<f:if condition="{eventStreetAddress}">
+					<span itemprop="streetAddress">{eventStreetAddress}</span>
+				</f:if>
+				<f:if condition="{eventLocality}">
+					<f:if condition="{eventPostalCode}">
+						<f:if condition="{eventCountry}"><span itemprop="addressCountry">{eventCountry}</span>&#8209;</f:if><span itemprop="postalCode">{eventPostalCode}</span>
+						<span itemprop="addressLocality">{eventLocality}</span>
+					</f:if>
+				</f:if>
+			</span>
+			<f:if condition="{eventWebsite}">
+				<span>
+					<span class="separator">|</span> <a href="{eventWebsite}">Site&nbsp;officiel</a>
+					<meta itemprop="url" content="{eventWebsite}"/>
+				</span>
+			</f:if>
+		</span>
 	</div>
-	<ts:render path="content" />
+	<ts:render path="main" />
 </article>
