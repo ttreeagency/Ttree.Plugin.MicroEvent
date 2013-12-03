@@ -11,6 +11,9 @@
 		  	"@type" : "Place",
 		  	<f:if condition="{eventLocality}">"address" : <![CDATA[{]]>
 		  		"@type" : "PostalAddress",
+		  		"name" : "{eventLocationName -> f:format.htmlspecialchars()}"
+		  		"streetAddress" : "{eventStreetAddress -> f:format.htmlspecialchars()}"
+		  		"postalCode" : "{eventPostalCode -> f:format.htmlspecialchars()}"
 		  		"addressLocality" : "{eventLocality -> f:format.htmlspecialchars()}"
 		  		"addressCountry" : "{eventCountry -> f:format.htmlspecialchars()}"
 		  	}</f:if>
