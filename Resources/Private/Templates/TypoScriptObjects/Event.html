@@ -26,7 +26,10 @@
 								<meta itemprop="startDate" content="{f:format.date(date: eventEndDate, format: 'c')}"/>
 							</f:if>
 							<div class="events-date">{date}</div>
-							<neos:link.node node="{node}" class="text-small" format="ical">Télécharger (<em>iCal</em>)</neos:link.node>
+							<f:comment>
+								<!-- Wait the resolution of: https://review.typo3.org/#/c/25904/ -->
+								<neos:link.node node="{node}" class="text-small" format="ics">Télécharger (<em>iCal</em>)</neos:link.node>
+							</f:comment>
 						</f:if>
 					</div>
 					<div class="col-md-6">

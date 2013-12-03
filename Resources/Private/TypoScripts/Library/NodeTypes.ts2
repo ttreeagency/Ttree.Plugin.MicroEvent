@@ -74,3 +74,13 @@ prototype(Ttree.Plugin.MicroEvent:Event) {
 prototype(Ttree.Plugin.MicroEvent:EventLinkedData) < prototype(Ttree.Plugin.MicroEvent:Event) {
 	templatePath = 'resource://Ttree.Plugin.MicroEvent/Private/Templates/LinkedData/Event.html'
 }
+
+prototype(Ttree.Plugin.MicroEvent:EventICalendar) < prototype(Ttree.Plugin.MicroEvent:Event) {
+	templatePath = 'resource://Ttree.Plugin.MicroEvent/Private/Templates/TypoScriptObjects/EventICalendar.ical'
+}
+
+root.eventICalendar {
+	@position = 'before format'
+	condition = ${request.format == 'ics' && q(documentNode).property('_nodeType').name == 'Ttree.Plugin.MicroEvent:Event'}
+	type = 'Ttree.Plugin.MicroEvent:EventICalendar'
+}
