@@ -26,11 +26,11 @@
 		</f:if>
 		<span itemprop="location" itemscope itemtype="http://schema.org/Place">
 			<f:if condition="{eventLocationName}">
-				<span itemprop="name"><b>{eventLocationName}</b></span>
+				<span itemprop="name"><b>{eventLocationName}</b></span> <span class="separator">|</span>
 			</f:if>
 			<span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
 				<f:if condition="{eventStreetAddress}">
-					<span itemprop="streetAddress">{eventStreetAddress}</span>
+					<span itemprop="streetAddress">{eventStreetAddress}</span> <span class="separator">|</span>
 				</f:if>
 				<f:if condition="{eventLocality}">
 					<f:if condition="{eventPostalCode}">
