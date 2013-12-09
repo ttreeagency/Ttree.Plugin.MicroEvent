@@ -9,10 +9,11 @@ prototype(TYPO3.Neos:PrimaryContent).ttreePluginMicroEventEvent {
 	@position = 'start'
 }
 
-prototype(Ttree.Plugin.MicroEvent:EventList) < prototype(TYPO3.Neos:Template)
+prototype(Ttree.Plugin.MicroEvent:EventList) < prototype(TYPO3.Neos:Content)
 prototype(Ttree.Plugin.MicroEvent:EventList) {
 	templatePath = 'resource://Ttree.Plugin.MicroEvent/Private/Templates/TypoScriptObjects/EventList.html'
-	className = 'event-menu'
+
+	attributes.class = 'event-menu'
 
 	events = TYPO3.TypoScript:Collection {
 		prototype(Ttree.Plugin.MicroEvent:Event) {
@@ -24,9 +25,11 @@ prototype(Ttree.Plugin.MicroEvent:EventList) {
 	}
 }
 
-prototype(Ttree.Plugin.MicroEvent:Event) < prototype(TYPO3.Neos:Template)
+prototype(Ttree.Plugin.MicroEvent:Event) < prototype(TYPO3.TypoScript:Template)
 prototype(Ttree.Plugin.MicroEvent:Event) {
 	templatePath = 'resource://Ttree.Plugin.MicroEvent/Private/Templates/TypoScriptObjects/Event.html'
+
+	node = ${node}
 
 	mainImageNode = ${q(node).children('main').children('[instanceof TYPO3.Neos.NodeTypes:Image]').get(0)}
 	mainImage = ${q(this.mainImageNode).property('image')}

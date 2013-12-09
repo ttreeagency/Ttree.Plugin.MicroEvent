@@ -3,10 +3,10 @@
 {namespace media=TYPO3\Media\ViewHelpers}
 {namespace event=Ttree\Plugin\MicroEvent\ViewHelpers}
 
-<neos:contentElement node="{node}" class="{className}">
+<div{attributes -> f:format.raw()}>
 	<div class="events-container">
 		<section class="events row">
 			<ts:render path="events" />
 		</section>
 	</div>
-</neos:contentElement>
+</div>
