@@ -4,7 +4,7 @@
     "description": "TYPO3 Neos plugin to handle simple event calendar, based on KISS principle",
     "license": ["MIT"],
     "require": {
-        "ttree/sortablenode": "@dev"
+        "ttree/sortablenode": "0.1.*"
     },
     "autoload": {
         "psr-0": {
