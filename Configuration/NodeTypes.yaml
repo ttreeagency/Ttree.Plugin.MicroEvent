@@ -121,7 +121,7 @@
         inspector:
           group: eventDetails
           editorOptions:
-            format: 'dd-mm-yyyy hh:ii'
+            format: 'd-m-Y H:i'
     eventEndDate:
       type: date
       ui:
@@ -130,7 +130,7 @@
         inspector:
           group: eventDetails
           editorOptions:
-            format: 'dd-mm-yyyy hh:ii'
+            format: 'd-m-Y H:i'
     eventWebsite:
       type: string
       ui:
