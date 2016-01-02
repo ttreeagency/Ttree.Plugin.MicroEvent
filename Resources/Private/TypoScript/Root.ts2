@@ -11,6 +11,8 @@ prototype(TYPO3.Neos:PrimaryContent).ttreePluginMicroEventEvent {
 
 prototype(Ttree.Plugin.MicroEvent:EventList) < prototype(TYPO3.Neos:Content)
 prototype(Ttree.Plugin.MicroEvent:EventList) {
+	@context.eventsArray = ${q(documentNode).children('[instanceof Ttree.Plugin.MicroEvent:Event]')}
+
 	templatePath = 'resource://Ttree.Plugin.MicroEvent/Private/Templates/TypoScriptObjects/EventList.html'
 
 	attributes.class = 'event-menu'
@@ -19,9 +21,21 @@ prototype(Ttree.Plugin.MicroEvent:EventList) {
 		prototype(Ttree.Plugin.MicroEvent:Event) {
 			templatePath = 'resource://Ttree.Plugin.MicroEvent/Private/Templates/TypoScriptObjects/EventListItem.html'
 		}
-		collection = ${q(documentNode).children('[instanceof Ttree.Plugin.MicroEvent:Event]')}
+		collection = ${eventsArray}
 		itemRenderer = Ttree.Plugin.MicroEvent:Event
 		itemName = 'node'
+	}
+
+	@cache {
+		mode = 'cached'
+		entryIdentifier {
+			node = ${node}
+		}
+		entryTags {
+			1 = ${'Node_' + node.identifier}
+			2 = ${Neos.Caching.nodeTag(eventsArray)}
+			3 = ${Neos.Caching.descendantOfTag(eventsArray)}
+		}
 	}
 }
 
