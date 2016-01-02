@@ -3,7 +3,7 @@
 {namespace media=TYPO3\Media\ViewHelpers}
 {namespace event=Ttree\Plugin\MicroEvent\ViewHelpers}
 
-<article itemscope itemtype="http://schema.org/Event" class="col-lg-4 col-md-6 col-sm-6 {event:style.eventClass(event: node)} {f:if(condition:archived,else:'events-upcoming')}">
+<article itemscope itemtype="http://schema.org/Event" class="col-lg-4 col-md-6 col-sm-6 {event:style.eventClass(event: node, archived: archived)} {f:if(condition:archived,else:'events-upcoming')}">
 	<neos:link.node node="{node}">
 		<div class="events-header-overlay">
 			<header>

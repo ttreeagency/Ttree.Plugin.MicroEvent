@@ -8,7 +8,7 @@ prototype(Ttree.Plugin.MicroEvent:Event) {
     mainImage = ${q(this.mainImageNode).property('image')}
 
     title = ${q(node).property('title')}
-    archived = ${q(node).property('archived')}
+    archived = ${Date.now() > this.eventEndDate}
 
     eventLocationName = ${q(node).property('postalAddressName')}
     eventStreetAddress = ${q(node).property('postalAddressStreetAddress')}
@@ -19,11 +19,14 @@ prototype(Ttree.Plugin.MicroEvent:Event) {
     eventWebsite = ${q(node).property('eventWebsite')}
 
     eventStartDate = ${q(node).property('eventStartDate')}
-    eventEndDate = ${q(node).property('eventEndDate')}
+    @context.eventStartDate = ${this.eventStartDate}
+    eventEndDate = ${q(node).property('eventEndDate') ? q(node).property('eventEndDate') : q(node).property('eventStartDate')}
+    @context.eventEndDate = ${this.eventEndDate}
+    hasEndDate = ${q(node).property('eventEndDate') ? true : false}
 
     date = Ttree.Plugin.MicroEvent:HumanDateInterval {
-        startDate = ${q(node).property('eventStartDate')}
-        endDate = ${q(node).property('eventEndDate')}
+        startDate = ${eventStartDate}
+        endDate = ${eventEndDate}
     }
 
     articleBody = Ttree.Plugin.Seo:DocumentTeaser {

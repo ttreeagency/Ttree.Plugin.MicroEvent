@@ -15,8 +15,8 @@
 		<h3>Où &amp; quand ?</h3>
 		<f:if condition="{date}">
 			<meta itemprop="startDate" content="{f:format.date(date: eventStartDate, format: 'c')}"/>
-			<f:if condition="{eventEndDate}">
-				<meta itemprop="startDate" content="{f:format.date(date: eventEndDate, format: 'c')}"/>
+			<f:if condition="{hasEndDate}">
+				<meta itemprop="endDate" content="{f:format.date(date: eventEndDate, format: 'c')}"/>
 			</f:if>
 			<span class="events-date">{date}</span> <span class="separator">|</span>
 			<f:comment>

@@ -22,43 +22,44 @@ namespace Ttree\Plugin\MicroEvent\ViewHelpers\Style;
  *                                                                        */
 
 use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3\TYPO3CR\Domain\Model\NodeInterface;
 
 /**
  * @api
  */
-class EventClassViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractViewHelper {
+class EventClassViewHelper extends AbstractViewHelper
+{
 
-	/**
-	 * @param \TYPO3\TYPO3CR\Domain\Model\NodeInterface $event
-	 * @return string
-	 */
-	public function render(NodeInterface $event) {
-		if ($event->getNodeType()->getName() !== 'Ttree.Plugin.MicroEvent:Event') {
-			return;
-		}
-		$classes = array('event-type-default');
-		switch ($event->getProperty('eventType')) {
-			case '':
-				$classes[] = 'event-type-basic';
-				break;
-			case 'event':
-				$classes[] = 'event-type-event';
-				break;
-			case 'talk':
-				$classes[] = 'event-type-talk';
-				break;
-			case 'reminder':
-				$classes[] = 'event-type-reminder';
-				break;
-		}
-		if ($event->getProperty('archived')) {
-			$classes[] = 'event-type-archived';
-		}
+    /**
+     * @param NodeInterface $event
+     * @param boolean $archived
+     * @return string
+     */
+    public function render(NodeInterface $event, $archived = false)
+    {
+        if ($event->getNodeType()->getName() !== 'Ttree.Plugin.MicroEvent:Event') {
+            return '';
+        }
+        $classes = array('event-type-default');
+        switch ($event->getProperty('eventType')) {
+            case '':
+                $classes[] = 'event-type-basic';
+                break;
+            case 'event':
+                $classes[] = 'event-type-event';
+                break;
+            case 'talk':
+                $classes[] = 'event-type-talk';
+                break;
+            case 'reminder':
+                $classes[] = 'event-type-reminder';
+                break;
+        }
+        if ($archived === true) {
+            $classes[] = 'event-type-archived';
+        }
 
-		return trim(implode(' ', $classes));
-	}
+        return trim(implode(' ', $classes));
+    }
 }
-
-
-?>

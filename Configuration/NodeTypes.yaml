@@ -138,10 +138,3 @@
         reloadIfChanged: true
         inspector:
           group: eventDetails
-    archived:
-      type: boolean
-      defaultValue: FALSE
-      ui:
-        label: 'Archived'
-        inspector:
-          group: 'eventDetails'
