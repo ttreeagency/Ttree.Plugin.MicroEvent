@@ -10,7 +10,17 @@
 				<h2 itemprop="name headline">
 					{title}
 				</h2>
+				<div class="events-event-timeline">
+					<f:if condition="{date}">
+						<meta itemprop="startDate" content="{f:format.date(date: eventStartDate, format: 'c')}"/>
+						<f:if condition="{eventEndDate}">
+							<meta itemprop="startDate" content="{f:format.date(date: eventEndDate, format: 'c')}"/>
+						</f:if>
+						{date}
+					</f:if>
+				</div>
 			</header>
+
 			<f:if condition="{mainImage}">
 				<meta itemprop="image" content="{media:uri.image(image: mainImage, maximumWidth:800)}">
 				<meta itemprop="url" content="{neos:uri.node(node: post, absolute: 1)}">
@@ -29,25 +39,7 @@
 			</f:if>
 		</div>
 		<div class="wrapper">
-			<div class="events-event-timeline">
-				<f:if condition="{date}">
-					<meta itemprop="startDate" content="{f:format.date(date: eventStartDate, format: 'c')}"/>
-					<f:if condition="{eventEndDate}">
-						<meta itemprop="startDate" content="{f:format.date(date: eventEndDate, format: 'c')}"/>
-					</f:if>
-					{date}
-				</f:if>
-			</div>
-			<f:if condition="{eventLocality}">
-				<div itemprop="location" itemscope itemtype="http://schema.org/Place" class="events-event-location">
-					<span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-						<span itemprop="addressLocality">{eventLocality}</span>
-						<f:if condition="{eventCountry}">
-							<span class="separator">|</span> <span itemprop="addressCountry">{eventCountry}</span>
-						</f:if>
-					</span>
-				</div>
-			</f:if>
+			&nbsp;
 		</div>
 	</neos:link.node>
 </article>
