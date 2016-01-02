@@ -17,13 +17,17 @@ prototype(Ttree.Plugin.MicroEvent:EventList) {
 
     @cache {
         mode = 'cached'
+
         entryIdentifier {
             node = ${node}
         }
+
         entryTags {
             1 = ${'Node_' + node.identifier}
             2 = ${Neos.Caching.nodeTag(eventsArray)}
             3 = ${Neos.Caching.descendantOfTag(eventsArray)}
         }
+
+        maximumLifetime = ${eventsArray.eventCacheLifetime()}
     }
 }
