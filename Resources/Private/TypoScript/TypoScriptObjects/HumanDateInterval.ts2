@@ -1,0 +1,4 @@
+prototype(Ttree.Plugin.MicroEvent:HumanDateInterval) >
+prototype(Ttree.Plugin.MicroEvent:HumanDateInterval) {
+    @class = 'Ttree\\Plugin\\MicroEvent\\TypoScript\\HumanDateIntervalImplementation'
+}

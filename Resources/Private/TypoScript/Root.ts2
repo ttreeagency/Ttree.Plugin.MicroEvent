@@ -1,99 +1,10 @@
-prototype(Ttree.Plugin.MicroEvent:HumanDateInterval) >
-prototype(Ttree.Plugin.MicroEvent:HumanDateInterval) {
-	@class = 'Ttree\\Plugin\\MicroEvent\\TypoScript\\HumanDateIntervalImplementation'
-}
+include: NodeTypes/*
+include: TypoScriptObjects/*
 
 prototype(TYPO3.Neos:PrimaryContent).ttreePluginMicroEventEvent {
 	condition = ${q(node).is('[instanceof Ttree.Plugin.MicroEvent:Event]')}
 	type = 'Ttree.Plugin.MicroEvent:Event'
 	@position = 'start'
-}
-
-prototype(Ttree.Plugin.MicroEvent:EventList) < prototype(TYPO3.Neos:Content)
-prototype(Ttree.Plugin.MicroEvent:EventList) {
-	@context.eventsArray = ${q(documentNode).children('[instanceof Ttree.Plugin.MicroEvent:Event]')}
-
-	templatePath = 'resource://Ttree.Plugin.MicroEvent/Private/Templates/TypoScriptObjects/EventList.html'
-
-	attributes.class = 'event-menu'
-
-	events = TYPO3.TypoScript:Collection {
-		prototype(Ttree.Plugin.MicroEvent:Event) {
-			templatePath = 'resource://Ttree.Plugin.MicroEvent/Private/Templates/TypoScriptObjects/EventListItem.html'
-		}
-		collection = ${eventsArray}
-		itemRenderer = Ttree.Plugin.MicroEvent:Event
-		itemName = 'node'
-	}
-
-	@cache {
-		mode = 'cached'
-		entryIdentifier {
-			node = ${node}
-		}
-		entryTags {
-			1 = ${'Node_' + node.identifier}
-			2 = ${Neos.Caching.nodeTag(eventsArray)}
-			3 = ${Neos.Caching.descendantOfTag(eventsArray)}
-		}
-	}
-}
-
-prototype(Ttree.Plugin.MicroEvent:Event) < prototype(TYPO3.TypoScript:Template)
-prototype(Ttree.Plugin.MicroEvent:Event) {
-	templatePath = 'resource://Ttree.Plugin.MicroEvent/Private/Templates/TypoScriptObjects/Event.html'
-
-	node = ${node}
-
-	mainImageNode = ${q(node).children('main').children('[instanceof TYPO3.Neos.NodeTypes:Image]').get(0)}
-	mainImage = ${q(this.mainImageNode).property('image')}
-
-	title = ${q(node).property('title')}
-	archived = ${q(node).property('archived')}
-
-	eventLocationName = ${q(node).property('postalAddressName')}
-	eventStreetAddress = ${q(node).property('postalAddressStreetAddress')}
-	eventPostalCode = ${q(node).property('postalAddressPostalCode')}
-	eventLocality = ${q(node).property('postalAddressLocality')}
-	eventCountry = ${q(node).property('postalAddressCountry')}
-
-	eventWebsite = ${q(node).property('eventWebsite')}
-
-	eventStartDate = ${q(node).property('eventStartDate')}
-	eventEndDate = ${q(node).property('eventEndDate')}
-
-	date = Ttree.Plugin.MicroEvent:HumanDateInterval {
-		startDate = ${q(node).property('eventStartDate')}
-		endDate = ${q(node).property('eventEndDate')}
-	}
-
-	articleBody = Ttree.Plugin.Seo:DocumentTeaser {
-		maximumCharacters = 800
-	}
-
-	teaser = TYPO3.TypoScript:Collection {
-		itemName = 'node'
-		itemRenderer = TYPO3.Neos:ContentCase
-		collection = ${q(documentNode).children('main').children().slice(0,1)}
-	}
-
-	content = TYPO3.TypoScript:Collection {
-		itemName = 'node'
-		itemRenderer = TYPO3.Neos:ContentCase
-		collection = ${q(documentNode).children('main').children().slice(1)}
-	}
-
-	main = TYPO3.Neos:ContentCollection {
-		nodePath = 'main'
-	}
-}
-
-prototype(Ttree.Plugin.MicroEvent:EventLinkedData) < prototype(Ttree.Plugin.MicroEvent:Event) {
-	templatePath = 'resource://Ttree.Plugin.MicroEvent/Private/Templates/LinkedData/Event.html'
-}
-
-prototype(Ttree.Plugin.MicroEvent:EventICalendar) < prototype(Ttree.Plugin.MicroEvent:Event) {
-	templatePath = 'resource://Ttree.Plugin.MicroEvent/Private/Templates/TypoScriptObjects/EventICalendar.ical'
 }
 
 root.eventICalendar {

@@ -1,0 +1,3 @@
+prototype(Ttree.Plugin.MicroEvent:EventLinkedData) < prototype(Ttree.Plugin.MicroEvent:Event) {
+    templatePath = 'resource://Ttree.Plugin.MicroEvent/Private/Templates/LinkedData/Event.html'
+}

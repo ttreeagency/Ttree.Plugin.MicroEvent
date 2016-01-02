@@ -1,0 +1,3 @@
+prototype(Ttree.Plugin.MicroEvent:EventICalendar) < prototype(Ttree.Plugin.MicroEvent:Event) {
+    templatePath = 'resource://Ttree.Plugin.MicroEvent/Private/Templates/TypoScriptObjects/EventICalendar.ical'
+}
